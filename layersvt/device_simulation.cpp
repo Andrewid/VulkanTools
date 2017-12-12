@@ -1509,6 +1509,23 @@ VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL GetInstanceProcAddr(VkInstance instance
 
 }  // anonymous namespace
 
+// Pre-Instance Functions (see [LALI]) ///////////////////////////////////////////////////////////////////////////////////////////
+
+VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL devsimEnumerateInstanceLayerProperties(
+    const VkEnumerateInstanceLayerPropertiesChain *pChain, uint32_t *pCount, VkLayerProperties *pProperties) {
+    // TODO what goes here?
+    DebugPrintf("devsimEnumerateInstanceLayerProperties\n");
+    return VK_SUCCESS;
+}
+
+VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL
+devsimEnumerateInstanceExtensionProperties(const VkEnumerateInstanceExtensionPropertiesChain *pChain, const char *pLayerName,
+                                           uint32_t *pCount, VkExtensionProperties *pProperties) {
+    // TODO what goes here?
+    DebugPrintf("devsimEnumerateInstanceExtensionProperties\n");
+    return VK_SUCCESS;
+}
+
 // Function symbols directly exported by the layer's library /////////////////////////////////////////////////////////////////////
 
 VK_LAYER_EXPORT VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL vkGetInstanceProcAddr(VkInstance instance, const char *pName) {
