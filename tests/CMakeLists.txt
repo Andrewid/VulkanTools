@@ -9,6 +9,7 @@ if (NOT WIN32)
             COMMAND ln -sf ${CMAKE_CURRENT_SOURCE_DIR}/devsim_test1_in_ArrayOfVkFormatProperties.json
             COMMAND ln -sf ${CMAKE_CURRENT_SOURCE_DIR}/devsim_test1_in_ArrayOfVkExtensionProperties.json
             COMMAND ln -sf ${CMAKE_CURRENT_SOURCE_DIR}/devsim_test1_gold.json
+            COMMAND ln -sf ${CMAKE_CURRENT_SOURCE_DIR}/CreateInstanceVersion.py
             VERBATIM
             )
         set_target_properties(vt_test-dir-symlinks PROPERTIES FOLDER ${VULKANTOOLS_TARGET_FOLDER})

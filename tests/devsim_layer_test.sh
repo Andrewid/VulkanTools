@@ -58,7 +58,16 @@ diff ${FILENAME_01_TEMP1} ${FILENAME_01_TEMP2} >> ${FILENAME_01_STDOUT}
 #[ $? -eq 0 ] || ERRMSG="jq file compare failed"
 
 #############################################################################
-#cat ${FILENAME_01_STDOUT}
+# Test #2 Exercise devsim's detection of requested Vulkan API version.
+
+./CreateInstanceVersion.py 1 0 0
+[ $? -eq 0 ] || ERRMSG="version check 1.0.0 failed"
+
+./CreateInstanceVersion.py 1 1 0
+[ $? -eq 0 ] || ERRMSG="version check 1.1.0 failed"
+
+#############################################################################
+cat ${FILENAME_01_STDOUT}
 
 if [ "$ERRMSG" ] ; then
    printf "$RED[  FAILED  ]$NC $ERRMSG\n"
