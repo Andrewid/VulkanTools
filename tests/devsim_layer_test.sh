@@ -33,7 +33,7 @@ VKJSON_INFO="${PWD}/../submodules/Vulkan-LoaderAndValidationLayers/libs/vkjson/v
 #############################################################################
 # Test #1 Load config files, compare output of vkjson_info against a gold file.
 
-FILENAME_01_IN="devsim_test1_in_ArrayOfVkFormatProperties.json:devsim_test1_in.json"
+FILENAME_01_IN="devsim_test1_in_ArrayOfVkFormatProperties.json:devsim_test1_in.json:devsim_test1_in_ArrayOfVkExtensionProperties.json"
 FILENAME_01_GOLD="devsim_test1_gold.json"
 FILENAME_01_RESULT="device_simulation_layer_test_1.json"
 FILENAME_01_STDOUT="device_simulation_layer_test_1.txt"
