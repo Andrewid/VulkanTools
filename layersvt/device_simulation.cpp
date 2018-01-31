@@ -1511,6 +1511,8 @@ VKAPI_ATTR PFN_vkVoidFunction VKAPI_CALL GetInstanceProcAddr(VkInstance instance
 
 // Pre-Instance Functions (see [LALI]) ///////////////////////////////////////////////////////////////////////////////////////////
 
+#if 0
+
 VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL devsimEnumerateInstanceLayerProperties(
     const VkEnumerateInstanceLayerPropertiesChain *pChain, uint32_t *pCount, VkLayerProperties *pProperties) {
     // TODO what goes here?
@@ -1525,6 +1527,44 @@ devsimEnumerateInstanceExtensionProperties(const VkEnumerateInstanceExtensionPro
     DebugPrintf("devsimEnumerateInstanceExtensionProperties\n");
     return VK_SUCCESS;
 }
+
+#else
+
+extern "C" VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL devsimEnumerateInstanceExtensionProperties(VkEnumerateInstanceExtensionPropertiesChain *pChain,
+    const char *pLayerName, uint32_t *pPropertyCount, VkExtensionProperties *pProperties) {
+
+    printf("Hit devsimEnumerateInstanceExtensionProperties with:======================================================================\n");
+    printf("\tpLayerName: %s\n", pLayerName);
+    printf("\tpPropertyCount: %d\n", pPropertyCount ? *pPropertyCount : 0);
+    printf("\tpProperties: %p\n", pProperties);
+
+    VkResult res = pChain->CallDown(pLayerName, pPropertyCount, pProperties);
+
+    printf("Returned from devsimEnumerateInstanceExtensionProperties with:\n");
+    printf("\tpLayerName: %s\n", pLayerName);
+    printf("\tpPropertyCount: %d\n", pPropertyCount ? *pPropertyCount : 0);
+    printf("\tpProperties: %p\n\n", pProperties);
+
+    return res;
+}
+
+extern "C" VK_LAYER_EXPORT VKAPI_ATTR VkResult VKAPI_CALL devsimEnumerateInstanceLayerProperties(VkEnumerateInstanceLayerPropertiesChain *pChain,
+    uint32_t *pPropertyCount, VkLayerProperties *pProperties) {
+
+    printf("Hit devsimEnumerateInstanceLayerProperties with:===================================================================\n");
+    printf("\tpPropertyCount: %d\n", pPropertyCount ? *pPropertyCount : 0);
+    printf("\tpProperties: %p\n", pProperties);
+
+    VkResult res = pChain->CallDown(pPropertyCount, pProperties);
+
+    printf("Returned from devsimEnumerateInstanceLayerProperties with:\n");
+    printf("\tpPropertyCount: %d\n", pPropertyCount ? *pPropertyCount : 0);
+    printf("\tpProperties: %p\n\n", pProperties);
+
+    return res;
+}
+
+#endif
 
 // Function symbols directly exported by the layer's library /////////////////////////////////////////////////////////////////////
 
