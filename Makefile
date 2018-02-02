@@ -17,7 +17,6 @@ DEBUG_TARGET   = $(DEBUG_DIR)/layersvt/libVkLayer_$(PROJ_NAME).so
 all: $(RELEASE_TARGET) $(DEBUG_TARGET)
 
 $(SUBMOD_TIMESTAMP):
-	touch $@
 
 $(RELEASE_DIR): $(SUBMOD_TIMESTAMP)
 	cmake -H. -B$@ -DCMAKE_BUILD_TYPE=Release
@@ -31,6 +30,11 @@ $(RELEASE_TARGET): $(RELEASE_DIR) layersvt/$(PROJ_NAME).cpp
 $(DEBUG_TARGET): $(DEBUG_DIR) layersvt/$(PROJ_NAME).cpp
 	$(MAKE) -C $(DEBUG_DIR)
 
+
+.PHONY: update smu
+update smu:
+	./update_external_sources.sh
+	touch $(SUBMOD_TIMESTAMP)
 
 .PHONY: test_release
 test_release: $(RELEASE_TARGET)
